@@ -113,7 +113,15 @@ class _SpotifyBigCardState extends State<SpotifyBigCard> {
                 ),
               );
             } else if (snapshot.hasError) {
-              return Text('${snapshot.error}');
+              return Center(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Text('Youssef is not playing a song right now'),
+                    Icon(FontAwesomeIcons.sadCry)
+                  ],
+                ),
+              );
             }
             return const Center(child: CircularProgressIndicator());
           },

@@ -26,56 +26,60 @@ class _ProfilePageState extends State<ProfilePage> {
         builder: (context) => Scaffold(
           appBar: buildAppBar(context),
           body: Center(
-            child: ConstrainedBox(
-              constraints: BoxConstraints.expand(width: 600, height: 800),
-              child: Column(
-                children: [
-                  ProfileWidget(
-                    imagePath: user.imagePath,
-                  ),
-                  const SizedBox(height: 24),
-                  buildName(user),
-                  const SizedBox(height: 15),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 50),
-                    child: SizedBox(
-                      height: 80,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        mainAxisSize: MainAxisSize.max,
-                        children: const <Widget>[
-                          ProfileInfoCard(
-                            firstText: '',
-                            secondText: '',
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          ProfileInfoCard(
-                            firstText: '',
-                            secondText: '',
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          ProfileInfoCard(
-                            firstText: '',
-                            secondText: '',
-                          ),
-                        ],
+            child: SingleChildScrollView(
+              primary: true,
+              physics: BouncingScrollPhysics(),
+              child: ConstrainedBox(
+                constraints: BoxConstraints.expand(width: 600, height: 1000),
+                child: Column(
+                  children: [
+                    ProfileWidget(
+                      imagePath: user.imagePath,
+                    ),
+                    const SizedBox(height: 24),
+                    buildName(user),
+                    const SizedBox(height: 15),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 50),
+                      child: SizedBox(
+                        height: 80,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          mainAxisSize: MainAxisSize.max,
+                          children: const <Widget>[
+                            ProfileInfoCard(
+                              firstText: '',
+                              secondText: '',
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            ProfileInfoCard(
+                              firstText: '',
+                              secondText: '',
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            ProfileInfoCard(
+                              firstText: '',
+                              secondText: '',
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  const SizedBox(height: 35),
-                  Wrap(
-                    children: [
-                      SpotifyBigCard(),
-                      StackoverflowBigCard(),
-                      DiscordBigCard(),
-                      GithubBigCard()
-                    ],
-                  ),
-                ],
+                    const SizedBox(height: 35),
+                    Wrap(
+                      children: [
+                        SpotifyBigCard(),
+                        StackoverflowBigCard(),
+                        DiscordBigCard(),
+                        GithubBigCard()
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

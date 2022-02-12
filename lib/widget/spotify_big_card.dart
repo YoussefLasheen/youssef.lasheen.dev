@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
+import 'package:personal_website/widget/onhover_button.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SpotifyBigCard extends StatefulWidget {
   const SpotifyBigCard({
@@ -34,81 +36,87 @@ class _SpotifyBigCardState extends State<SpotifyBigCard> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),
         ),
-        child: Padding(
-          padding: const EdgeInsets.all(8.5),
-          child: FutureBuilder(
-            future: futureAlbum,
-            builder: (BuildContext context, AsyncSnapshot snapshot) {
-              if (snapshot.hasData) {
-                return Row(
-                  children: [
-                    Expanded(
-                      flex: 2,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(15),
-                        child: Image.network(
-                          snapshot.data!.imageURL,
+        child: FutureBuilder(
+          future: futureAlbum,
+          builder: (BuildContext context, AsyncSnapshot snapshot) {
+            if (snapshot.hasData) {
+              return OnhoverButton(
+                onPressed: () {
+                  launch(snapshot.data!.link);
+                },
+                button: Text('OPEN',  style: TextStyle( fontSize: 20, fontWeight: FontWeight.bold),),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.5),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        flex: 2,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(15),
+                          child: Image.network(
+                            snapshot.data!.imageURL,
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      width: 15,
-                    ),
-                    Expanded(
-                      flex: 3,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Flexible(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  snapshot.data!.title,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15,
+                      SizedBox(
+                        width: 15,
+                      ),
+                      Expanded(
+                        flex: 3,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Flexible(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    snapshot.data!.title,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15,
+                                    ),
                                   ),
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Text(
-                                  snapshot.data!.artist,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: TextStyle(
-                                    fontSize: 10,
+                                  SizedBox(
+                                    height: 5,
                                   ),
-                                )
-                              ],
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.topRight,
-                            child: Padding(
-                              padding: const EdgeInsets.all(5.0),
-                              child: FaIcon(
-                                FontAwesomeIcons.spotify,
-                                size: 25,
-                                color: isDarkMode
-                                    ? Color(0xFF73e2a6)
-                                    : Color(0xFF042b1d),
+                                  Text(
+                                    snapshot.data!.artist,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                      fontSize: 10,
+                                    ),
+                                  )
+                                ],
                               ),
                             ),
-                          ),
-                        ],
+                            Align(
+                              alignment: Alignment.topRight,
+                              child: Padding(
+                                padding: const EdgeInsets.all(5.0),
+                                child: FaIcon(
+                                  FontAwesomeIcons.spotify,
+                                  size: 25,
+                                  color: isDarkMode
+                                      ? Color(0xFF73e2a6)
+                                      : Color(0xFF042b1d),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
-                );
-              } else if (snapshot.hasError) {
-                return Text('${snapshot.error}');
-              }
-              return const Center(child:  CircularProgressIndicator());
-            },
-          ),
+                    ],
+                  ),
+                ),
+              );
+            } else if (snapshot.hasError) {
+              return Text('${snapshot.error}');
+            }
+            return const Center(child: CircularProgressIndicator());
+          },
         ),
       ),
     );
@@ -168,6 +176,6 @@ class Song {
         title: json['item']['name'],
         artist: json['item']['artists'][0]['name'],
         imageURL: json['item']['album']['images'][0]['url'],
-        link: json['item']['name']);
+        link: json['item']['external_urls']['spotify']);
   }
 }

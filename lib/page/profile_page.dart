@@ -72,6 +72,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                     const SizedBox(height: 35),
                     Wrap(
+                      runSpacing: 10,
                       children: [
                         SpotifyBigCard(),
                         StackoverflowBigCard(),

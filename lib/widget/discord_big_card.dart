@@ -58,6 +58,7 @@ class DiscordBigCard extends StatelessWidget {
                   padding: const EdgeInsets.all(5.0),
                   child: FaIcon(
                     FontAwesomeIcons.discord,
+                    size: 25,
                     color: isDarkMode
                                     ? Color(0xFF6d88db)
                                     : Color(0xFF1f1e1f),

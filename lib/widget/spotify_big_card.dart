@@ -91,6 +91,7 @@ class _SpotifyBigCardState extends State<SpotifyBigCard> {
                               padding: const EdgeInsets.all(5.0),
                               child: FaIcon(
                                 FontAwesomeIcons.spotify,
+                                size: 25,
                                 color: isDarkMode
                                     ? Color(0xFF73e2a6)
                                     : Color(0xFF042b1d),

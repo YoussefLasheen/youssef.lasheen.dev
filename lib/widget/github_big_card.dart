@@ -100,7 +100,7 @@ class _GithubBigCardState extends State<GithubBigCard> {
                               padding: const EdgeInsets.all(5.0),
                               child: FaIcon(
                                 FontAwesomeIcons.github,
-                                size: 20,
+                                size: 25,
                                 color: isDarkMode
                                     ? Color(0xFF00863d)
                                     : Color(0xFF042b1d),

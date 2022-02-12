@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:personal_website/utils/user_preferences.dart';
 import 'package:personal_website/model/user.dart';
 import 'package:personal_website/widget/appbar_widget.dart';
+import 'package:personal_website/widget/codeforces_big_card.dart';
 import 'package:personal_website/widget/discord_big_card.dart';
 import 'package:personal_website/widget/github_big_card.dart';
 import 'package:personal_website/widget/profile_info_big_card.dart';
@@ -77,7 +78,8 @@ class _ProfilePageState extends State<ProfilePage> {
                         SpotifyBigCard(),
                         StackoverflowBigCard(),
                         DiscordBigCard(),
-                        GithubBigCard()
+                        GithubBigCard(),
+                        CodeforcesBigCard()
                       ],
                     ),
                   ],

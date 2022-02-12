@@ -9,6 +9,7 @@ import 'package:personal_website/widget/profile_info_big_card.dart';
 import 'package:personal_website/widget/profile_info_card.dart';
 import 'package:personal_website/widget/profile_widget.dart';
 import 'package:personal_website/widget/spotify_big_card.dart';
+import 'package:personal_website/widget/stackoverflow_big_card.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -69,10 +70,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   Wrap(
                     children: [
                       SpotifyBigCard(),
-                      ProfileInfoBigCard(
-                          firstText: "test",
-                          secondText: "test test",
-                          icon: Icon(Icons.nights_stay_sharp)),
+                      StackoverflowBigCard(),
                       DiscordBigCard(),
                       GithubBigCard()
                     ],

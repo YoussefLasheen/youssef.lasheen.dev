@@ -1,5 +1,6 @@
 import 'package:animated_theme_switcher/animated_theme_switcher.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:personal_website/utils/user_preferences.dart';
 import 'package:personal_website/model/user.dart';
 import 'package:personal_website/widget/appbar_widget.dart';
@@ -44,26 +45,26 @@ class _ProfilePageState extends State<ProfilePage> {
                       child: SizedBox(
                         height: 80,
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
                           mainAxisSize: MainAxisSize.max,
                           children: const <Widget>[
                             ProfileInfoCard(
-                              firstText: '',
-                              secondText: '',
+                              text: "INTP",
+                              iconData: FontAwesomeIcons.iCursor,
                             ),
                             SizedBox(
                               width: 10,
                             ),
                             ProfileInfoCard(
-                              firstText: '',
-                              secondText: '',
+                              text: "Developer",
+                              iconData: Icons.developer_mode_rounded,
                             ),
                             SizedBox(
                               width: 10,
                             ),
                             ProfileInfoCard(
-                              firstText: '',
-                              secondText: '',
+                              text: "Engineering\nStudent",
+                              iconData: Icons.engineering_rounded,
                             ),
                           ],
                         ),

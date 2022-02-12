@@ -13,7 +13,7 @@ AppBar buildAppBar(BuildContext context) {
     actions: [
       ThemeSwitcher(
         builder: (context) => IconButton(
-          icon: Icon(Icons.nightlight),
+          icon: Icon(Icons.nightlight, color: isDarkMode?Colors.white:Colors.black,),
           onPressed: () {
             final theme = isDarkMode ? MyThemes.lightTheme : MyThemes.darkTheme;
 

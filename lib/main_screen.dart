@@ -8,12 +8,12 @@ import 'package:personal_website/widget/profile_widget.dart';
 import 'package:personal_website/widget/spotify_big_card.dart';
 import 'package:personal_website/widget/stackoverflow_big_card.dart';
 
-class ProfilePage extends StatefulWidget {
+class MainScreen extends StatefulWidget {
   @override
-  _ProfilePageState createState() => _ProfilePageState();
+  _MainScreenState createState() => _MainScreenState();
 }
 
-class _ProfilePageState extends State<ProfilePage> {
+class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;

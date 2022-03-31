@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
-import 'page/profile_page.dart';
-
+import 'package:personal_website/main_screen.dart';
 
 Future main() async {
   runApp(MyApp());
@@ -13,7 +11,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       darkTheme: ThemeData.dark(),
-      home: ProfilePage(),
+      home: MainScreen(),
     );
   }
 }

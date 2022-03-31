@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foil/foil.dart';
 
 class InfoCard extends StatefulWidget {
   final Function buildChild;
@@ -38,25 +39,39 @@ class _InfoCardState extends State<InfoCard> {
             constraints: const BoxConstraints.expand(height: 125, width: 300),
             child: Card(
               color: const Color(0xFF1f1e1f),
-              elevation: 5,
+              elevation: hovering ? 20 : 5,
+              clipBehavior: Clip.hardEdge,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: InkWell(
-                onHover: (_hovering) {
-                  setState(() {
-                    hovering = _hovering;
-                  });
+              child: GestureDetector(
+                onTap: () {
+                  widget.onPressed(snapshot);
                 },
-                onTap: () => widget.onPressed(snapshot),
-                child: IndexedStack(
-                  index: hovering ? 0 : 1,
-                  children: [
-                    Center(child: widget.onhoverChild),
-                    Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: widget.buildChild(snapshot)),
-                  ],
+                child: MouseRegion(
+                  cursor: SystemMouseCursors.click,
+                  onEnter: (_) {
+                    setState(() {
+                      hovering = true;
+                    });
+                  },
+                  onExit: (_) {
+                    setState(() {
+                      hovering = false;
+                    });
+                  },
+                  child: Foil(
+                    isUnwrapped: !hovering,
+                    child: IndexedStack(
+                      index: hovering ? 0 : 1,
+                      children: [
+                        Center(child: widget.onhoverChild),
+                        Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: widget.buildChild(snapshot)),
+                      ],
+                    ),
+                  ),
                 ),
               ),
             ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'social_cards/codeforces_card.dart';
+import 'social_cards/discord_card.dart';
 import 'social_cards/github_card.dart';
 import 'social_cards/spotify_card.dart';
 import 'social_cards/stackoverflow_card.dart';
@@ -15,7 +16,7 @@ class DynamicSocialCards extends StatelessWidget {
       children: [
         SpotifyBigCard(),
         StackoverflowBigCard(),
-        //DiscordBigCard(),
+        DiscordBigCard(),
         GithubBigCard(),
         CodeforcesBigCard()
       ],

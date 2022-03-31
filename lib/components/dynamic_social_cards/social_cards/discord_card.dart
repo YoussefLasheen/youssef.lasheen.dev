@@ -1,29 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:personal_website/widget/onhover_button.dart';
-import 'package:personal_website/widget/profile_widget.dart';
+import 'package:personal_website/components/dynamic_social_cards/api_services.dart';
+import 'package:personal_website/components/dynamic_social_cards/shared_components/info_card.dart';
 
 class DiscordBigCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    return ConstrainedBox(
-      constraints: BoxConstraints.expand(height: 125, width: 300),
-      child: Card(
-        color: isDarkMode ? Color(0xFF1f1e1f) : Color(0xFF6d88db),
-        elevation: 5,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: OnhoverButton(
-          onPressed: (){
-            Clipboard.setData(ClipboardData(text: 'YoussefLasheen#45416'));
-          },
-          button: Text('COPY USERNAME', style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),),
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
+    return InfoCard(
+      fetchData: fetchDiscord(),
+      onPressed: (_)=>Clipboard.setData(ClipboardData(text: 'YoussefLasheen#45416')),
+      onhoverChild: Text('COPY USERNAME', style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),),
+      buildChild:(snapshot)=>Row(
               children: [
                 Expanded(
                   child: CircleAvatar(
@@ -74,9 +63,6 @@ class DiscordBigCard extends StatelessWidget {
                 ),
               ],
             ),
-          ),
-        ),
-      ),
     );
   }
 }

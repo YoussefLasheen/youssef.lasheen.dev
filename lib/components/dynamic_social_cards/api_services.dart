@@ -66,3 +66,8 @@ Future<SpotifyCard> fetchSpotify() async {
 
   return SpotifyCard.fromJson(responseJson);
 }
+
+
+Future<bool> fetchDiscord() async {
+  return true;
+}

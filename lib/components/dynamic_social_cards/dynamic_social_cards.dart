@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:personal_website/components/dynamic_social_cards/social_cards/resume_card.dart';
 
 import 'social_cards/codeforces_card.dart';
 import 'social_cards/discord_card.dart';
@@ -18,7 +19,8 @@ class DynamicSocialCards extends StatelessWidget {
         StackoverflowBigCard(),
         DiscordBigCard(),
         GithubBigCard(),
-        CodeforcesBigCard()
+        CodeforcesBigCard(),
+        ResumeCard()
       ],
     );
   }

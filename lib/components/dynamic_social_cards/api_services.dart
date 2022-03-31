@@ -36,7 +36,7 @@ Future<SpotifyCard> fetchSpotify() async {
   const String clientId = '5dc8e9d18afd404ba022c996c423b351';
   const String clientSecret = '75df0d24579142a9a82f4b20713e8e1d';
   const String refreshToken =
-      'AQCH_tS-O7ynws46Jlza3GNGxwbomXWrDTasqv_phA5bPch3_QE3kgL0MHG8W-E0YtTibiJVEuWn4a1-4uw6IWcalvmkYu49q9YOfpRJ_1yyPFWCgnRkfrklm47Hnmf3n_w';
+      'AQBPwd1VgF_t4cubLz7vKLmrHBS72AoB9fRsStcWbKnA2djueI_tFdlx7S1ZIK-76jIupz3rBZwbp6vRmyA50mUhgB_WlfXeIyZaFdyfpY4_gqqFQTMb0ZepD2GKj0Pjvbk';
 
   Future<String> getAccessToken() async {
     var map = <String, dynamic>{};

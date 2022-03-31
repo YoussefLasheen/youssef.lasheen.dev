@@ -18,8 +18,8 @@ class DynamicSocialCards extends StatelessWidget {
         const SpotifyBigCard(),
         const StackoverflowBigCard(),
         DiscordBigCard(),
-        const GithubBigCard(),
-        const CodeforcesBigCard(),
+        GithubBigCard(),
+        CodeforcesBigCard(),
         ResumeCard()
       ],
     );

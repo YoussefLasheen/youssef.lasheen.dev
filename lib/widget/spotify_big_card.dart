@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
-import 'package:personal_website/widget/onhover_button.dart';
+import 'package:personal_website/widget/info_card.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SpotifyBigCard extends StatefulWidget {
@@ -16,116 +16,75 @@ class SpotifyBigCard extends StatefulWidget {
 }
 
 class _SpotifyBigCardState extends State<SpotifyBigCard> {
-  late Future<Song> futureAlbum;
-
-  @override
-  void initState() {
-    super.initState();
-    futureAlbum = fetchAlbum();
-  }
-
   @override
   Widget build(BuildContext context) {
-    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
-
-    return ConstrainedBox(
-      constraints: BoxConstraints.expand(height: 125, width: 300),
-      child: Card(
-        color: isDarkMode ? Color(0xFF1f1e1f) : Color(0xFF00d862),
-        elevation: 5,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15),
-        ),
-        child: FutureBuilder(
-          future: futureAlbum,
-          builder: (BuildContext context, AsyncSnapshot snapshot) {
-            if (snapshot.hasData) {
-              return OnhoverButton(
-                onPressed: () {
-                  launch(snapshot.data!.link);
-                },
-                button: Text('OPEN',  style: TextStyle( fontSize: 20, fontWeight: FontWeight.bold),),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.5),
-                  child: Row(
+    return InfoCard(
+      fetchData: fetchAlbum(),
+      onPressed: (snapshot) => launch(snapshot.data!.link),
+      onhoverChild: Text(
+        'OPEN',
+        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+      ),
+      buildChild: (snapshot) => Row(
+        children: [
+          Expanded(
+            flex: 2,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(15),
+              child: Image.network(
+                snapshot.data!.imageURL,
+              ),
+            ),
+          ),
+          SizedBox(
+            width: 15,
+          ),
+          Expanded(
+            flex: 3,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Flexible(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Expanded(
-                        flex: 2,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(15),
-                          child: Image.network(
-                            snapshot.data!.imageURL,
-                          ),
+                      Text(
+                        snapshot.data!.title,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15,
                         ),
                       ),
                       SizedBox(
-                        width: 15,
+                        height: 5,
                       ),
-                      Expanded(
-                        flex: 3,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Flexible(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    snapshot.data!.title,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 15,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
-                                  Text(
-                                    snapshot.data!.artist,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(
-                                      fontSize: 10,
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.topRight,
-                              child: Padding(
-                                padding: const EdgeInsets.all(5.0),
-                                child: FaIcon(
-                                  FontAwesomeIcons.spotify,
-                                  size: 25,
-                                  color: isDarkMode
-                                      ? Color(0xFF73e2a6)
-                                      : Color(0xFF042b1d),
-                                ),
-                              ),
-                            ),
-                          ],
+                      Text(
+                        snapshot.data!.artist,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          fontSize: 10,
                         ),
-                      ),
+                      )
                     ],
                   ),
                 ),
-              );
-            } else if (snapshot.hasError) {
-              return Center(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Text('Youssef is not playing a song right now'),
-                    Icon(FontAwesomeIcons.sadCry)
-                  ],
+                Align(
+                  alignment: Alignment.topRight,
+                  child: Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: FaIcon(
+                      FontAwesomeIcons.spotify,
+                      size: 25,
+                      color: Color(0xFF73e2a6),
+                    ),
+                  ),
                 ),
-              );
-            }
-            return const Center(child: CircularProgressIndicator());
-          },
-        ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

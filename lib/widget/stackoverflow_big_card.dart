@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
-import 'package:personal_website/widget/onhover_button.dart';
+import 'package:personal_website/widget/info_card.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class StackoverflowBigCard extends StatefulWidget {
@@ -16,161 +16,131 @@ class StackoverflowBigCard extends StatefulWidget {
 }
 
 class _StackoverflowBigCardState extends State<StackoverflowBigCard> {
-  late Future<Song> futureAlbum;
-
-  @override
-  void initState() {
-    super.initState();
-    futureAlbum = fetchAlbum();
-  }
-
   @override
   Widget build(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
-    return ConstrainedBox(
-      constraints: const BoxConstraints.expand(height: 125, width: 300),
-      child: Card(
-        color: isDarkMode ? const Color(0xFF1f1e1f) : const Color(0xFFeeeeee),
-        elevation: 5,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15),
+    return InfoCard(
+        fetchData: fetchAlbum(),
+        onPressed: () =>
+            launch('https://stackoverflow.com/users/10240634/youssef-lasheen'),
+        onhoverChild: Text(
+          'OPEN',
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
         ),
-        child: OnhoverButton(
-          onPressed: (){
-            launch('https://stackoverflow.com/users/10240634/youssef-lasheen');
-          },
-          button: Text('OPEN',  style: TextStyle( fontSize: 20, fontWeight: FontWeight.bold),),
-          child: Padding(
-            padding: const EdgeInsets.all(8),
-            child: FutureBuilder(
-              future: futureAlbum,
-              builder: (BuildContext context, AsyncSnapshot snapshot) {
-                if (snapshot.hasData) {
-                  return Row(
+        buildChild: (snapshot) => Row(
+              children: [
+                Expanded(
+                  flex: 1,
+                  child: CircleAvatar(
+                    radius: 40,
+                    backgroundImage: NetworkImage(
+                      snapshot.data!.imageURL,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  width: 15,
+                ),
+                Expanded(
+                  flex: 2,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Expanded(
-                        flex: 1,
-                        child: CircleAvatar(
-                          radius: 40,
-                          backgroundImage: NetworkImage(
-                            snapshot.data!.imageURL,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 15,
-                      ),
-                      Expanded(
-                        flex: 2,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      Flexible(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Flexible(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    snapshot.data!.name,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: const TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 15,
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    height: 5,
-                                  ),
-                                  Text(
-                                    snapshot.data!.reputation.toString(),
-                                    style: const TextStyle(
-                                        fontSize: 10,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  const SizedBox(
-                                    height: 2,
-                                  ),
-                                  Row(
-                                    children: [
-                                      const FaIcon(
-                                        Icons.circle,
-                                        size: 10,
-                                        color: Color(0xFFffcb38),
-                                      ),
-                                      const SizedBox(
-                                        width: 1,
-                                      ),
-                                      Text(
-                                        snapshot.data!.gold.toString(),
-                                        style: const TextStyle(fontSize: 10),
-                                      ),
-                                      const SizedBox(
-                                        width: 5,
-                                      ),
-                                      const FaIcon(
-                                        Icons.circle,
-                                        size: 10,
-                                        color: Color(0xFFc0c0c0),
-                                      ),
-                                      const SizedBox(
-                                        width: 1,
-                                      ),
-                                      Text(
-                                        snapshot.data!.silver.toString(),
-                                        style: const TextStyle(fontSize: 10),
-                                      ),
-                                      const SizedBox(
-                                        width: 5,
-                                      ),
-                                      const FaIcon(
-                                        Icons.circle,
-                                        size: 10,
-                                        color: Color(0xFFd0986b),
-                                      ),
-                                      const SizedBox(
-                                        width: 1,
-                                      ),
-                                      Text(
-                                        snapshot.data!.bronze.toString(),
-                                        style: const TextStyle(fontSize: 10),
-                                      ),
-                                      const SizedBox(
-                                        width: 5,
-                                      ),
-                                    ],
-                                  ),
-                                ],
+                            Text(
+                              snapshot.data!.name,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15,
                               ),
                             ),
-                            Align(
-                              alignment: Alignment.topRight,
-                              child: Padding(
-                                padding: const EdgeInsets.all(5.0),
-                                child: FaIcon(
-                                  FontAwesomeIcons.stackOverflow,
-                                  size: 25,
-                                  color: isDarkMode
-                                      ? const Color(0xFFfc8136)
-                                      : const Color(0xFF042b1d),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            Text(
+                              snapshot.data!.reputation.toString(),
+                              style: const TextStyle(
+                                  fontSize: 10, fontWeight: FontWeight.bold),
+                            ),
+                            const SizedBox(
+                              height: 2,
+                            ),
+                            Row(
+                              children: [
+                                const FaIcon(
+                                  Icons.circle,
+                                  size: 10,
+                                  color: Color(0xFFffcb38),
                                 ),
-                              ),
+                                const SizedBox(
+                                  width: 1,
+                                ),
+                                Text(
+                                  snapshot.data!.gold.toString(),
+                                  style: const TextStyle(fontSize: 10),
+                                ),
+                                const SizedBox(
+                                  width: 5,
+                                ),
+                                const FaIcon(
+                                  Icons.circle,
+                                  size: 10,
+                                  color: Color(0xFFc0c0c0),
+                                ),
+                                const SizedBox(
+                                  width: 1,
+                                ),
+                                Text(
+                                  snapshot.data!.silver.toString(),
+                                  style: const TextStyle(fontSize: 10),
+                                ),
+                                const SizedBox(
+                                  width: 5,
+                                ),
+                                const FaIcon(
+                                  Icons.circle,
+                                  size: 10,
+                                  color: Color(0xFFd0986b),
+                                ),
+                                const SizedBox(
+                                  width: 1,
+                                ),
+                                Text(
+                                  snapshot.data!.bronze.toString(),
+                                  style: const TextStyle(fontSize: 10),
+                                ),
+                                const SizedBox(
+                                  width: 5,
+                                ),
+                              ],
                             ),
                           ],
                         ),
                       ),
+                      Align(
+                        alignment: Alignment.topRight,
+                        child: Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: FaIcon(
+                            FontAwesomeIcons.stackOverflow,
+                            size: 25,
+                            color: isDarkMode
+                                ? const Color(0xFFfc8136)
+                                : const Color(0xFF042b1d),
+                          ),
+                        ),
+                      ),
                     ],
-                  );
-                } else if (snapshot.hasError) {
-                  return Text('${snapshot.error}');
-                }
-                return const Center(child: CircularProgressIndicator());
-              },
-            ),
-          ),
-        ),
-      ),
-    );
+                  ),
+                ),
+              ],
+            ));
   }
 }
 

@@ -70,7 +70,7 @@ class _MainScreenState extends State<MainScreen> {
                     children: [
                       SpotifyBigCard(),
                       StackoverflowBigCard(),
-                      DiscordBigCard(),
+                      //DiscordBigCard(),
                       GithubBigCard(),
                       CodeforcesBigCard()
                     ],

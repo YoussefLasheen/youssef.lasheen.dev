@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:personal_website/components/basic_info/basic_info.dart';
 import 'package:personal_website/components/dynamic_social_cards/dynamic_social_cards.dart';
-import 'package:personal_website/widget/profile_info_card.dart';
-import 'package:personal_website/widget/profile_widget.dart';
+import 'package:personal_website/components/small_info_cards/shared_components/profile_info_card.dart';
+import 'package:personal_website/components/basic_info/components/profile_widget.dart';
+
+import 'components/small_info_cards/small_info_cards.dart';
 
 class MainScreen extends StatefulWidget {
   @override
@@ -24,42 +27,10 @@ class _MainScreenState extends State<MainScreen> {
               constraints: BoxConstraints.expand(width: 600, height: 1000),
               child: Column(
                 children: [
-                  ProfileWidget(
-                    imagePath: 'https://avatars.githubusercontent.com/u/28854622?v=4',
-                  ),
                   const SizedBox(height: 24),
-                  buildName(),
+                  BasicInfo(),
                   const SizedBox(height: 15),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 50),
-                    child: SizedBox(
-                      height: 80,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        mainAxisSize: MainAxisSize.max,
-                        children: const <Widget>[
-                          ProfileInfoCard(
-                            text: "INTP",
-                            iconData: FontAwesomeIcons.iCursor,
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          ProfileInfoCard(
-                            text: "Developer",
-                            iconData: Icons.developer_mode_rounded,
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          ProfileInfoCard(
-                            text: "Engineering\nStudent",
-                            iconData: Icons.engineering_rounded,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+                  SmallInfoCards(),
                   const SizedBox(height: 35),
                   DynamicSocialCards()
                 ],
@@ -70,18 +41,4 @@ class _MainScreenState extends State<MainScreen> {
       ),
     );
   }
-
-  Widget buildName() => Column(
-        children: [
-          Text(
-            'Youssef Lasheen',
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            'youssef@lasheen.dev',
-            style: TextStyle(color: Colors.grey),
-          )
-        ],
-      );
 }

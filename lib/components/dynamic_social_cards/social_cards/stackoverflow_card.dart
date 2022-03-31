@@ -23,7 +23,7 @@ class _StackoverflowBigCardState extends State<StackoverflowBigCard> {
 
     return InfoCard(
         fetchData: fetchStackoverflow(),
-        onPressed: () =>
+        onPressed: (_) =>
             launch('https://stackoverflow.com/users/10240634/youssef-lasheen'),
         onhoverChild: Text(
           'OPEN',

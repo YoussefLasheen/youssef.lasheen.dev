@@ -27,7 +27,7 @@ class _CodeforcesBigCardState extends State<CodeforcesBigCard> {
           'OPEN',
           style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
         ),
-        onPressed: () =>
+        onPressed: (_) =>
             launch('https://codeforces.com/profile/YoussefLasheen'),
         buildChild: (snapshot) => Row(
               children: [

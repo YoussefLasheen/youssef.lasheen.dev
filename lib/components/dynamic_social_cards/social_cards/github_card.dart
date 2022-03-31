@@ -24,7 +24,7 @@ class _GithubBigCardState extends State<GithubBigCard> {
 
     return InfoCard(
       fetchData: fetchGithub(),
-      onPressed: ()=>launch('https://github.com/YoussefLasheen'),
+      onPressed: (_)=>launch('https://github.com/YoussefLasheen'),
       onhoverChild: Text('OPEN',  style: TextStyle( fontSize: 20, fontWeight: FontWeight.bold),),
       buildChild:(snapshot)=> Row(
               children: [

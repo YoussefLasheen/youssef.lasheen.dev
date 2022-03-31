@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:personal_website/widget/codeforces_big_card.dart';
-import 'package:personal_website/widget/discord_big_card.dart';
-import 'package:personal_website/widget/github_big_card.dart';
+import 'package:personal_website/components/dynamic_social_cards/dynamic_social_cards.dart';
 import 'package:personal_website/widget/profile_info_card.dart';
 import 'package:personal_website/widget/profile_widget.dart';
-import 'package:personal_website/widget/spotify_big_card.dart';
-import 'package:personal_website/widget/stackoverflow_big_card.dart';
 
 class MainScreen extends StatefulWidget {
   @override
@@ -65,16 +61,7 @@ class _MainScreenState extends State<MainScreen> {
                     ),
                   ),
                   const SizedBox(height: 35),
-                  Wrap(
-                    runSpacing: 10,
-                    children: [
-                      SpotifyBigCard(),
-                      StackoverflowBigCard(),
-                      //DiscordBigCard(),
-                      GithubBigCard(),
-                      CodeforcesBigCard()
-                    ],
-                  ),
+                  DynamicSocialCards()
                 ],
               ),
             ),

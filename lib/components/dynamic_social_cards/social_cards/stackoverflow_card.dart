@@ -2,8 +2,9 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:http/http.dart' as http;
-import 'package:personal_website/widget/info_card.dart';
+import 'package:personal_website/components/dynamic_social_cards/api_services.dart';
+
+import 'package:personal_website/components/dynamic_social_cards/shared_components/info_card.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class StackoverflowBigCard extends StatefulWidget {
@@ -21,7 +22,7 @@ class _StackoverflowBigCardState extends State<StackoverflowBigCard> {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     return InfoCard(
-        fetchData: fetchAlbum(),
+        fetchData: fetchStackoverflow(),
         onPressed: () =>
             launch('https://stackoverflow.com/users/10240634/youssef-lasheen'),
         onhoverChild: Text(
@@ -144,45 +145,6 @@ class _StackoverflowBigCardState extends State<StackoverflowBigCard> {
   }
 }
 
-Future<Song> fetchAlbum() async {
-  final response = await http.get(
-    Uri.parse(
-        'https://api.stackexchange.com/2.3/users/10240634?order=desc&sort=reputation&site=stackoverflow'),
-  );
-  final responseJson = jsonDecode(response.body);
-  print(responseJson);
 
-  return Song.fromJson(responseJson);
-}
 
-class Song {
-  final int bronze;
-  final int silver;
-  final int gold;
-  final int reputation;
-  final String link;
-  final String imageURL;
-  final String name;
 
-  const Song({
-    required this.bronze,
-    required this.silver,
-    required this.gold,
-    required this.reputation,
-    required this.link,
-    required this.imageURL,
-    required this.name,
-  });
-
-  factory Song.fromJson(Map<String, dynamic> json) {
-    return Song(
-      bronze: json['items'][0]['badge_counts']['bronze'],
-      silver: json['items'][0]['badge_counts']['silver'],
-      gold: json['items'][0]['badge_counts']['gold'],
-      reputation: json['items'][0]['reputation'],
-      link: json['items'][0]['link'],
-      imageURL: json['items'][0]['profile_image'],
-      name: json['items'][0]['display_name'],
-    );
-  }
-}

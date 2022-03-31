@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:personal_website/components/dynamic_social_cards/models.dart';
@@ -34,16 +33,20 @@ Future<CodeforcesCard> fetchCodeforces() async {
 }
 
 Future<SpotifyCard> fetchSpotify() async {
+  const String clientId = '5dc8e9d18afd404ba022c996c423b351';
+  const String clientSecret = '75df0d24579142a9a82f4b20713e8e1d';
+  const String refreshToken =
+      'AQCH_tS-O7ynws46Jlza3GNGxwbomXWrDTasqv_phA5bPch3_QE3kgL0MHG8W-E0YtTibiJVEuWn4a1-4uw6IWcalvmkYu49q9YOfpRJ_1yyPFWCgnRkfrklm47Hnmf3n_w';
 
   Future<String> getAccessToken() async {
     var map = <String, dynamic>{};
     map['grant_type'] = 'refresh_token';
-    map['refresh_token'] = dotenv.env['SPOTIFY_REFRESH_TOKEN'];
+    map['refresh_token'] = refreshToken;
     final response =
         await http.post(Uri.parse('https://accounts.spotify.com/api/token'),
             headers: <String, String>{
               'Authorization':
-                  'Basic ' + base64.encode('${dotenv.env['SPOTIFY_CLIENT_ID']}:${dotenv.env['SPOTIFY_CLIENT_SECRET']}'.codeUnits),
+                  'Basic ' + base64.encode('$clientId:$clientSecret'.codeUnits),
               'Content-Type': 'application/x-www-form-urlencoded',
             },
             body: map);

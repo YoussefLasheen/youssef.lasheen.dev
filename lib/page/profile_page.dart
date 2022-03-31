@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get/get.dart';
-import 'package:personal_website/utils/user_preferences.dart';
-import 'package:personal_website/model/user.dart';
 import 'package:personal_website/widget/codeforces_big_card.dart';
 import 'package:personal_website/widget/discord_big_card.dart';
 import 'package:personal_website/widget/github_big_card.dart';
@@ -19,7 +16,6 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
-    final user = UserPreferences.myUser;
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     return Material(
@@ -31,28 +27,11 @@ class _ProfilePageState extends State<ProfilePage> {
             constraints: BoxConstraints.expand(width: 600, height: 1000),
             child: Column(
               children: [
-                Align(
-                  alignment: Alignment.topRight,
-                  child: IconButton(
-                    onPressed: () {
-                      Get.isDarkMode
-                          ? Get.changeTheme(ThemeData.light())
-                          : Get.changeTheme(ThemeData.dark());
-                    },
-                    icon: Icon(
-                      isDarkMode
-                          ? FontAwesomeIcons.sun
-                          : FontAwesomeIcons.moon,
-                      color:
-                          isDarkMode ? Colors.yellowAccent : Colors.black,
-                    ),
-                  ),
-                ),
                 ProfileWidget(
-                  imagePath: user.imagePath,
+                  imagePath: 'https://avatars.githubusercontent.com/u/28854622?v=4',
                 ),
                 const SizedBox(height: 24),
-                buildName(user),
+                buildName(),
                 const SizedBox(height: 15),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 50),
@@ -103,15 +82,15 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  Widget buildName(User user) => Column(
+  Widget buildName() => Column(
         children: [
           Text(
-            user.name,
+            'Youssef Lasheen',
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
           ),
           const SizedBox(height: 4),
           Text(
-            user.email,
+            'youssef@lasheen.dev',
             style: TextStyle(color: Colors.grey),
           )
         ],

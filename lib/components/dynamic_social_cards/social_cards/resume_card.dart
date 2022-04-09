@@ -38,6 +38,7 @@ class ResumeCard extends StatelessWidget {
                 backgroundColor: Colors.transparent,
                 borderRadius: 0,
                 removeElevation: true,
+                placeholderWidget: Center(child: CircularProgressIndicator(),),
               ),
             ));
   }

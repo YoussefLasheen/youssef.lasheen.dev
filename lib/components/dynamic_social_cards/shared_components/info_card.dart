@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:foil/foil.dart';
 
 class InfoCard extends StatefulWidget {
   final Function buildChild;
@@ -60,9 +59,7 @@ class _InfoCardState extends State<InfoCard> {
                       hovering = false;
                     });
                   },
-                  child: Foil(
-                    isUnwrapped: !hovering,
-                    child: IndexedStack(
+                  child: IndexedStack(
                       index: hovering ? 0 : 1,
                       children: [
                         Center(child: widget.onhoverChild),
@@ -71,7 +68,6 @@ class _InfoCardState extends State<InfoCard> {
                             child: widget.buildChild(snapshot)),
                       ],
                     ),
-                  ),
                 ),
               ),
             ),

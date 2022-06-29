@@ -16,6 +16,8 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    bool isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
 
     return Material(
       child: Center(
@@ -24,7 +26,7 @@ class _MainScreenState extends State<MainScreen> {
           physics: BouncingScrollPhysics(),
           child: Center(
             child: ConstrainedBox(
-              constraints: BoxConstraints.expand(width: 600, height: 1000),
+              constraints: BoxConstraints.expand(width: 600, height: isLandscape?800:1200),
               child: Column(
                 children: [
                   const SizedBox(height: 24),

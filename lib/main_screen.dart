@@ -28,6 +28,7 @@ class _MainScreenState extends State<MainScreen> {
             child: ConstrainedBox(
               constraints: BoxConstraints.expand(width: 600, height: isLandscape?800:1200),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const SizedBox(height: 24),
                   BasicInfo(),
